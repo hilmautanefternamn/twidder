@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TWIDDER</title>
+  <meta charset="UTF-8">
+  <link href="static/client.css" type="text/css" rel="stylesheet">
+  <script src="static/client.js" type="text/javascript"></script>
+<!--  <script src="static/serverstub.js" type="text/javascript"></script> -->
+
+  <script id="welcomeview" type="text/view">
+    <div id="logo_slogan">
+      <img src="wimage.png" alt="Opsidopsi">
+    </div>
+    <div id="forms">
+      <div id="signIn">
+        <form method="POST" onsubmit="signIn(this); return false;">
+          <span>Email:</span><input type="email" name="email" required><br/>
+          <span>Password:</span><input type="password" name="password" required><br/>
+          <input type="submit" value="Login">
+        </form>
+      </div>
+      <div id="signUp">
+        <h2>Sign up here!</h2>
+          <form method="POST" onsubmit="javascript:signUp(this);return false;">
+            <span>First name:</span><input type="text" name="firstname" required><br/>
+            <span>Family name:</span><input type="text" name="familyname" required><br/>
+            <span>Gender:</span>
+              <select name="gender" size="1" required>
+                <option value="female">Female</option>
+                <option value="male">Male</option>
+                <option value="other">Other</option>
+              </select>
+            <span>City:</span><input type="text" name="city" required><br/>
+            <span>Country:</span><input type="text" name="country" required><br/>
+            <span>Email:</span><input type="email" name="email" required><br/>
+            <span>Password:</span><input type="password" name="password" minlength="6" required><br/>
+            <span>Repeat PSW:</span><input type="password" name="password" oninput="comparePasswords(1,2,'signup')" required><br/>
+            <input type="submit" value="Sign up" name="signup" disabled>
+          </form>
+        </div>
+    </div>
+  </script>
+
+  <script id="profileview" type="text/view">
+    <div class="tabs">
+      <button id="home" onclick="changeTab(this.id)">HOME</button>
+      <button id="browse" onclick="changeTab(this.id)">BROWSE</button>
+      <button id="account" onclick="changeTab(this.id)">ACCOUNT</button>
+    </div>
+      <div id="homecontent">
+        <div id="userinfo"></div>
+        <form method="POST" onsubmit="postMessage(this);return false;">
+          <span>Write a message to me!</span><br/><textarea rows="11" name="message"></textarea><br/>
+          <input id="save" type="submit" value="Post message" name="postmessage">
+        </form>
+        <br/><button onclick="loadWall(0)">Update wall</button><br/>
+        <div id="wall"></div>
+      </div>
+      <div id="browsecontent">
+        <form method="POST" onsubmit="loadProfile(this);return false;">
+          <span>Browse user by their email</span><input id="toEmail" type="email" name="email">
+          <input type="submit" value="Search" name="search">
+        </form>
+        <div id="browseprofile">
+          <form method="POST" onsubmit="postMessage(this);return false;">
+            <span>Write a message to me!</span><br/><textarea rows="11" name="message"></textarea><br/>
+            <input class="save" type="submit" value="Post message" name="postmessage">
+          </form>
+          <div id="browseinfo"></div>
+            <br/><button onclick="loadWall(1)">Update wall</button><br/>
+          <div id="browsewall"></div>
+        </div>
+      </div>
+      <div id="accountcontent">
+        <form method="POST" onsubmit="changePassword(this); return false;">
+          <span>Old password:</span><input type="password" name="oldpassword" required><br/>
+          <span>New password:</span><input type="password" name="password" minlength="6" required><br/>
+          <span>Repeat password:</span><input type="password" name="password" oninput="comparePasswords(0,1,'save')" required><br/>
+          <input class="save" type="submit" value="Save changes" name="save" disabled>
+        </form>
+        <button onclick="logOut()">Log out</button>
+      </div>
+  </script>
+</head>
+<body>
+  <div id="message"></div>
+  <div id="content"></div>
+</body>
+</html>
